@@ -2,9 +2,17 @@
 
 大概是发现github是个好东西后有了新鲜感？于是准备陆续的把一些代码放上来。当然回到正题，会记录日常的OJ，如果是一类的算法题目，也会归结到`algorithm`里面。
 
-## PAT
+每天一道`OJ`，防止老年痴呆。
+
+# PAT
+
+## 乙级
 
 第一阶段任务，慢慢刷吧。以C++为主，偶尔蹦出来几个python也不是不可能。
+
+## 甲级
+
+乙级有点简单，可以考虑开始甲级了。
 
 # 记录
 
@@ -15,7 +23,9 @@
 3. `stof`, `stoi` 完成字符串转数字。乙级 1054。
 4. `isdigital` 传入的变量是`char`类型。
 5. `if` `if` `else` 和 `if` `else if` `else` 对代码的执行结果影响不一样。
+6. [二维数组的定义](https://blog.csdn.net/FX677588/article/details/52708813)：传入常量不能传入参数。
+7. 输出`3`位数，高位补0：`printf("%03d ", arr[i][j]);`。
 
 # 参考
 
-大量参考了柳神的哦代码：https://github.com/liuchuo/PAT
+大量参考了柳神的代码：https://github.com/liuchuo/PAT
