@@ -19,8 +19,10 @@
 3. `stof`, `stoi` 完成字符串转数字。乙级 1054。
 4. `isdigital` 传入的变量是`char`类型。
 5. `if` `if` `else` 和 `if` `else if` `else` 对代码的执行结果影响不一样。
-6. [二维数组的定义](https://blog.csdn.net/FX677588/article/details/52708813)：传入常量不能传入参数。
+6. [二维数组的定义](https://blog.csdn.net/FX677588/article/details/52708813)：传入常量不能传入参数。乙级1066。
 7. 输出`3`位数，高位补0：`printf("%03d ", arr[i][j]);`。
+8. 哈希时要考虑空间大小，`int a[99999][99999]` 太大了，可以考虑使用 Map。乙级1090.
+9. `map`键对应的值不止一个时，值可以考虑用 `vector` 载入。
 
 # 参考
 
