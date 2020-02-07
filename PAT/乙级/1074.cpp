@@ -32,48 +32,62 @@ int main(int argc, char const *argv[])
 
 	int ad = 0;
 	int ba = 0;
+	int temp;
 
-	for (int i = num2.length()-1; i >= 0; --i)
+	for (int i = num2.length()-1; i >= 0; i--)
 	{
-		if (num2[i] - '0' + num1[i] - '0' + ad > table[i] - '0')
+		if (table[i] == '0')
+			temp = 10;
+		else
+			temp = table[i] - '0';
+		if (num2[i] - '0' + num1[i] - '0' + ad > temp)
 		{
-			ba = num2[i] - '0' + num1[i] - '0' - table[i] + '0' + ad;
+			ba = num2[i] - '0' + num1[i] - '0' - temp + ad;
 			ans.insert(ans.begin(), 1, ba);
-			// cout << " > ";showvector(ans);
 			ad = 1;
+			// showvector(ans);
+			// cout << endl;
 		}
-		if (num2[i] - '0' + num1[i] - '0' + ad < table[i] - '0')
+		if (num2[i] - '0' + num1[i] - '0' + ad < temp)
 		{
-			ad = 0;
 			ba = num2[i] - '0' + num1[i] - '0' + ad;
 			ans.insert(ans.begin(), 1, ba);
-			// cout << " < ";showvector(ans);
+			// showvector(ans);
+			ad = 0;
+			// cout << "--" << endl;
 		}
-		if (num2[i] - '0' + num1[i] - '0' + ad == table[i] - '0')
+		if (num2[i] - '0' + num1[i] - '0' + ad == temp)
 		{
 			ad = 1;
 			ans.insert(ans.begin(), 1, 0);
-			// cout << " = ";showvector(ans);
+			// showvector(ans);
+			// cout << endl;
 		}
 	}
+	if (ad == 1)
+	{
+		ans.insert(ans.begin(), 1, 1);
+	}
 
+	// 去除0
 	int len = ans.size();
-
-	for (int i = 0; i < len; ++i)
+	for (int i = 0; i < len; i++)
 	{
 		if (ans[i] == 0)
 		{
 			ans.erase(ans.begin() + 0);
+			len = ans.size();
+			if (len == 1)
+			{
+				cout << "0";
+				return 0;
+			}
 			i = 0;
-			// cout << endl;
 		}
 		else
-		{
 			break;
-		}
 	}
-	
-	showvector(ans);
 
+	showvector(ans);
 	return 0;
 }
