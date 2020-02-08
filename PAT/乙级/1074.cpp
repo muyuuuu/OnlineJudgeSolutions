@@ -6,12 +6,10 @@ using namespace std;
 template <class T>
 void showvector(std::vector<T> v)
 {
-    // 因此，如果你想直接告诉编译器T::iterator是类型而不是变量，只需用typename修饰：
     for (typename vector<T>::iterator it = v.begin(); it != v.end(); it++)
     {
         cout << *it;
     }
-    // cout << endl;
 }
 
 int main(int argc, char const *argv[])
@@ -45,23 +43,17 @@ int main(int argc, char const *argv[])
 			ba = num2[i] - '0' + num1[i] - '0' - temp + ad;
 			ans.insert(ans.begin(), 1, ba);
 			ad = 1;
-			// showvector(ans);
-			// cout << endl;
 		}
 		if (num2[i] - '0' + num1[i] - '0' + ad < temp)
 		{
 			ba = num2[i] - '0' + num1[i] - '0' + ad;
 			ans.insert(ans.begin(), 1, ba);
-			// showvector(ans);
 			ad = 0;
-			// cout << "--" << endl;
 		}
 		if (num2[i] - '0' + num1[i] - '0' + ad == temp)
 		{
 			ad = 1;
 			ans.insert(ans.begin(), 1, 0);
-			// showvector(ans);
-			// cout << endl;
 		}
 	}
 	if (ad == 1)

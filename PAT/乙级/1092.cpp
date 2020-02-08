@@ -4,6 +4,8 @@ using namespace std;
 
 double a[105][1005] = {0};
 
+int ans[1005];
+
 int main()
 {
 	int cla, city;
@@ -17,46 +19,41 @@ int main()
 		}
 	}
 
-	int max = -3;
-	for (int i = 0; i < city; ++i)
+	for (int j = 0; j < cla; j++)
 	{
-		for (int j = 0; j < cla; ++j)
+		for (int i = 0; i < city; i++)
 		{
-			if (a[i][j] > max)
-				max = a[i][j];
+			ans[j] += a[i][j];
 		}
+	}
+
+	int max = -3;
+
+	for (int i = 0; i < cla; i++)
+	{
+		if (ans[i] >= max)
+			max = ans[i];
 	}
 
 	cout << max << endl;
 
-	max = -3;
-	for (int j = 0; j < cla; ++j)
-	{
-		for (int i = 1; i < city; ++i)
-		{
-			a[0][j] += a[i][j];
-		}
-	}
-
-	for (int i = 0; i < city; ++i)
-	{
-		if ( a[0][i] > max)
-			max = a[0][i];
-	}
-
 	int flag = 0;
 
-	for (int i = 0; i < cla; ++i)
+	for (int i = 0; i < cla; i++)
 	{
-		if ( a[0][i] == max )
+		if (ans[i] == max)
 		{
-			if (flag == 1)
+			if (flag == 0)
 			{
-				cout << " ";
+				cout << i + 1;
+				flag = 1;
 			}
-			cout << (i + 1);
-			flag = 1;
+			else
+			{
+				cout << " " << i + 1;
+			}
 		}
 	}
+
 	return 0;
 }

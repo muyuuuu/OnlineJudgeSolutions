@@ -2,5 +2,6 @@
     "files.associations": {
         "algorithm": "cpp",
         "iostream": "cpp"
-    }
+    },
+    "git.ignoreLimitWarning": true
 }
