@@ -1,45 +1,22 @@
 #include <iostream>
-
+#include <map>
 using namespace std;
-
-int main()
-{
-    int a;
-    cin >> a;
-    string str;
-    for (int i = 0; i < a; i++)
-    {
-        cin >> str;
-        if (str[0] == 'P')
-        {
-            int p_num = 0; int a_num = 0; int t_num = 0;
-            for (int j = 0; j < str.length(); j++)
-            {
-                if (str[j] == 'A')
-                {
-                    a_num = 1;
-                }
-                if (str[j] == 'T' && a_num == 1)
-                {
-                    t_num = 1;
-                }
-            }
-            if (a_num == 1 && t_num == 1)
-            {
-                cout << "Yes" << endl;
-                continue;
-            }
+int main() {
+    int n, p = 0, t = 0;
+    string s;
+    cin >> n;
+    for(int i = 0; i < n; i++) {
+        cin >> s;
+        map<char, int> m;
+        for(int j = 0; j < s.size(); j++) {
+            m[s[j]]++;
+            if (s[j] == 'P') p = j;
+            if (s[j] == 'T') t = j;
         }
-        else if (str[0] == 'A')
-        {
-            
-        }
+        if (m['P'] == 1 && m['A'] != 0 && m['T'] == 1 && m.size() == 3 && t-p != 1 && p * (t-p-1) == s.length()-t-1)
+            printf("YES\n");
         else
-        {
-            cout << "No" << endl;
-            continue;
-        }
-        
+            printf("NO\n");
     }
     return 0;
 }
