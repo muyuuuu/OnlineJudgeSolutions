@@ -2,7 +2,8 @@
     "files.associations": {
         "algorithm": "cpp",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "cmath": "cpp"
     },
     "git.ignoreLimitWarning": true
 }
