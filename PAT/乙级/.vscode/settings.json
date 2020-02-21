@@ -3,7 +3,8 @@
         "algorithm": "cpp",
         "iostream": "cpp",
         "ostream": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "sstream": "cpp"
     },
     "git.ignoreLimitWarning": true
 }
