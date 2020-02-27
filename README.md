@@ -63,3 +63,4 @@ int cmp(node1 a, node1 b)
 }
 ```
 不如`return a.score != b.score ? a.score > b.score : a.num != b.num ? a.num < b.num : a.id < b.id;`
+19. 尽量不要操作一次删除一次，很容易超时，尽量以下标移动去解决问题。乙级1055。
