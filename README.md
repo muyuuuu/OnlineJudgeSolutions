@@ -47,3 +47,19 @@
 15. 尽量避免批量的命名数组，重复的操作很容易超时，同一种思维也能换一种写法。乙级1015。
 16. 虽然我不知道我的哪里错了，但学习到了`abs(j - i) * 1.0 / x != abs(j - i) / x`。乙级1088。
 17. `cin`时注意输入的与声明的数据类型是否有差异。乙级1053。
+18. 乙级1085，差 `20ms` 超时。`if else`写法比三元运算符写法耗时。
+```cpp
+int cmp(node1 a, node1 b)
+{
+    if (a.score != b.score)
+        return a.score > b.score;
+    else
+    {
+        if (a.num != b.num)
+            return a.num < b.num;
+        else
+            return a.id < b.id;
+    }
+}
+```
+不如`return a.score != b.score ? a.score > b.score : a.num != b.num ? a.num < b.num : a.id < b.id;`
