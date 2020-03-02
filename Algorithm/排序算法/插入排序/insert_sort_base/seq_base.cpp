@@ -1,11 +1,13 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
+
 int main(int argc, char const *argv[])
 {
-    int arr[10] = {3, 5, 4, 7, 1, 6, 8, 5, 9, 2};
     int len = 10;
+    int arr[10] = {3, 5, 4, 7, 1, 6, 8, 5, 9, 2};
     int temp;
     for (int i = 1; i < len; i++)
     {

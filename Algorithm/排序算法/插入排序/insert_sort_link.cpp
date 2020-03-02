@@ -1,6 +1,9 @@
 #include <iostream>
+#include <fstream>
+#include <ctime>
 
 using namespace std;
+
 
 struct node
 {
@@ -15,11 +18,35 @@ struct head
     int len = 0;
 };
 
+int arr[1000002] = {0};
+node ans[300002];
+
 int main(int argc, char const *argv[])
 {
-    int arr[10] = {6, 5, 4, 7, 3, 1, 8, 5, 9, 2};
-    int len = 10;
-    node ans[len];
+    int len = 0;
+
+    string path = "one_hundred_thousand.txt";
+    string out = "one_hundred_thousand_link.txt";
+    
+    ifstream in(path.c_str());
+    ofstream ou(out.c_str());
+    
+    if (!in.is_open())
+    {
+        cerr << "open file failed!" << endl;
+        exit(-1);
+    }
+
+    if (!ou.is_open())
+    {
+        cerr << "create file failed!" << endl;
+        exit(-1);
+    }
+    
+    int a = 0;
+    while (in >> a)
+        arr[len++] = a;
+    
     head L;
     for (int i = 0; i < len; i++)
     {
@@ -41,20 +68,11 @@ int main(int argc, char const *argv[])
         }
         L.len++;
     }
-    cout << "The length of link is : " << L.len << endl;
     node *p;
     p = L.first;
-    cout << endl << "Raw Data : ";
-    while (p != NULL)
-    {
-        cout << (*p).data << " ";
-        p = (*p).next;
-    }
-    cout << endl;
-    // 读取完毕 开始排序
-    p = L.first;
     p = (*p).next;
-    node *s, *t;
+    node *s;
+    clock_t start = clock();
     while (p != NULL)
     {
         if ((*p).data < (*(*p).pre).data)
@@ -105,18 +123,20 @@ int main(int argc, char const *argv[])
                 (*(*q).pre).next = p;
                 (*q).pre = p;
             }
-            cout << "Remove " << (*p).data << " :";
             p = s;
-            t = L.first;
-            while (t != NULL)
-            {
-                cout << " " << (*t).data;
-                t = (*t).next;
-            }
-            cout << endl;
         }
         else
             p = (*p).next;
     }
+    clock_t end = clock();
+    cout <<  (double)(end - start) / CLOCKS_PER_SEC << " seconds" << endl;
+    in.close();
+    p = L.first;
+    while (p != NULL)
+    {
+        ou << (*p).data << endl;
+        p = (*p).next;
+    }
+    ou.close();
     return 0;
 }
