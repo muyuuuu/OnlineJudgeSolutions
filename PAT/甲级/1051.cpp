@@ -1,27 +1,33 @@
 #include <iostream>
 #include <stack>
-#include <vector>
+
 using namespace std;
-int main() {
+
+int arr[1002];
+
+int main(int argc, char const *argv[])
+{
     int m, n, k;
-    scanf("%d %d %d", &m, &n, &k);
-    for(int i = 0; i < k; i++) {
-        bool flag = false;
-        stack<int> s;
-        vector<int> v(n + 1);
-        for(int j = 1; j <= n; j++)
-            scanf("%d", &v[j]);
-        int current = 1;
-        for(int j = 1; j <= n; j++) {
-            s.push(j);
-            if(s.size() > m) break;
-            while(!s.empty() && s.top() == v[current]) {
+    cin >> m >> n >> k;
+    for (int j = 0; j < k; j++)
+    {
+        for (int i = 1; i <= n; i++)
+            scanf("%d", &arr[i]);
+        int flag = 0, pos = 1;
+        stack <int> s;
+        flag = 0;
+        for (int i = 1; i <= n; i++)
+        {
+            s.push(i);
+            if (s.size() > m) break;
+            while (!s.empty() && s.top() == arr[pos])
+            {
                 s.pop();
-                current++;
+                pos += 1;
             }
         }
-        if(current == n + 1) flag = true;
-        if(flag) printf("YES\n");
+        if (pos == n + 1) flag = 1;
+        if (flag == 1) printf("YES\n");
         else printf("NO\n");
     }
     return 0;
