@@ -60,6 +60,5 @@ int main(int argc, char const *argv[])
         cout << "NA";
     else
         cout << vf[0].grade - vm[0].grade;
-    
     return 0;
 }
