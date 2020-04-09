@@ -30,3 +30,5 @@ int main()
     cout << cnt;
     return 0;
 }
+
+// https://www.geeksforgeeks.org/minimum-number-swaps-required-sort-array/

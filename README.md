@@ -1,6 +1,8 @@
 # 介绍
 
-每天一道`OJ`，防止老年痴呆。大概是发现`Github`是个好东西后有了新鲜感？于是准备陆续的把一些代码放上来。当然回到正题，会记录日常的OJ，如果是一类的算法题目，也会归结到`algorithm`里面。以C++为主，偶尔蹦出来几个python也不是不可能。整体画像如下，随缘更新。
+每天一道`OJ`，防止老年痴呆。大概是发现`Github`是个好东西后有了新鲜感？于是准备陆续的把一些代码放上来。更多算法记录在这里：https://muyuuuu.github.io/tags/DataStructure/
+
+当然回到正题，会记录日常的OJ，如果是一类的算法题目，也会归结到`algorithm`里面。以C++为主，偶尔蹦出来几个python也不是不可能。整体画像如下，随缘更新。
 
 <p align="center">
     <img src="./portrait.png" alt="portrait">
