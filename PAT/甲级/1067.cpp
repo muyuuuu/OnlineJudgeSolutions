@@ -9,7 +9,7 @@ int main()
     for(int i = 0; i < n; i++)
     {
         cin >> t;
-        a[t] = i;
+        a[i] = t;
     }
     for(int i = 1; i < n; i++) 
     {
@@ -20,7 +20,8 @@ int main()
                 swap(a[0],a[a[0]]);
                 cnt++;
             }
-            if(i != a[i]) {
+            if(i != a[i]) 
+            {
                 swap(a[0],a[i]);
                 cnt++;
             }
