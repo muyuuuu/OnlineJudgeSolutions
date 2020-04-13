@@ -1,13 +1,12 @@
 /*** 
  * @Author         : lanling
  * @Date           : 2020-04-12 14:35:49
- * @LastEditTime: 2020-04-12 14:43:03
+ * @LastEditTime   : 2020-04-12 14:46:34
  * @FilePath       : \熟悉C++\PracPriority.cpp
  * @Github         : https://github.com/muyuuuu
  * @Description    : 
  * @佛祖保佑，永无BUG
  */
-
 
 #include<iostream>
 #include<queue>
