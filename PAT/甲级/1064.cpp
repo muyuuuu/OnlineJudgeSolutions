@@ -13,7 +13,8 @@ void inOrder(int root)
     inOrder(root * 2 + 2);
 }
 
-int main() {
+int main() 
+{
     scanf("%d", &n);
     for (int i = 0; i < n; i++)
         scanf("%d", &in[i]);
