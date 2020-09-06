@@ -3,7 +3,7 @@
 
 #define lowbit(i) ((i) & (-i))
 
-const int maxn = 100010;
+const int maxn = 9;
 
 using namespace std;
 
@@ -30,6 +30,7 @@ void PeekMedian()
     while(left < right) 
     {
         mid = (left + right) / 2;
+        cout << left << " " << " " << mid << " " << right << " " << getsum(mid) << endl;
         if(getsum(mid) >= k)
             right = mid;
         else

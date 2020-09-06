@@ -4,48 +4,50 @@
 
 using namespace std;
 
-vector <int> ans, temp;
+vector <int> v, m;
 
 int main(int argc, char const *argv[])
 {
-    int n, a, cnt = 0;
-    string str;
+    int n;
     cin >> n;
-    cin .get();
+    string s;
     for (int i = 0; i < n; i++)
     {
-        cin >> str;
-        if (str == "Push")
+        cin >> s;
+        if (s[1] == 'o')
         {
-            cin >> a;
-            ans.push_back(a);
-            cnt++;
-        }
-        if (str == "Pop")
-        {
-            if (cnt <= 0)
+            if (v.empty())
             {
                 cout << "Invalid" << endl;
                 continue;
             }
             else
             {
-                cout << ans[ans.size() - 1] << endl;
-                ans.pop_back();
-                cnt--;
+                cout << v.back() << endl;
+                v.pop_back();
             }
         }
-        if (str == "PeekMedian")
+        if (s[1] == 'u')
         {
-            if (cnt <= 0)
+            int a;
+            cin >> a;
+            v.push_back(a);
+        }
+        if (s[1] == 'e')
+        {
+            if (v.empty())
             {
                 cout << "Invalid" << endl;
                 continue;
             }
-            temp = ans;
-            sort(temp.begin(), temp.end());
-            int s = temp.size();
-            s % 2 == 0 ? cout << temp[s / 2 - 1] << endl : cout << temp[(s + 1) / 2 - 1] << endl;
+            else
+            {
+                m.clear();
+                m.assign(v.begin(), v.end());
+                sort(m.begin(), m.end());
+                if (v.size() % 2 == 0) cout << m[v.size() / 2 - 1] << endl;
+                else cout << m[(v.size() + 1) / 2 - 1] << endl;   
+            }
         }
     }
     return 0;
