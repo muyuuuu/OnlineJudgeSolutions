@@ -1,1 +1,5 @@
-- [字符串练习](https://muyuuuu.github.io/2019/03/31/C-string/)
+- [String 练习](https://muyuuuu.github.io/2019/03/31/C-string/)
+- [array 练习](https://muyuuuu.github.io/2019/05/01/Cpp-Sequential-Container/)
+- [vector 练习](https://muyuuuu.github.io/2019/05/01/Cpp-Sequential-Container/)
+- [deque 练习](https://muyuuuu.github.io/2019/05/01/Cpp-Sequential-Container/)
+- [list 练习](https://muyuuuu.github.io/2019/05/01/Cpp-Sequential-Container/)
