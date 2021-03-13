@@ -4,4 +4,7 @@
 - [deque 练习](https://muyuuuu.github.io/2019/05/01/Cpp-Sequential-Container/)
 - [list 练习](https://muyuuuu.github.io/2019/05/01/Cpp-Sequential-Container/)
 - [set 练习](https://muyuuuu.github.io/2019/06/02/OJ-Cpp-cumulative/)
-- [map 联系](https://muyuuuu.github.io/2019/06/02/OJ-Cpp-cumulative/)
+- [map 练习](https://muyuuuu.github.io/2019/06/02/OJ-Cpp-cumulative/)
+- [stack练习](https://muyuuuu.github.io/2019/06/03/container-adaptor/)
+- [queue练习](https://muyuuuu.github.io/2019/06/03/container-adaptor/)
+- [priority_queue练习](https://muyuuuu.github.io/2019/06/03/container-adaptor/)
