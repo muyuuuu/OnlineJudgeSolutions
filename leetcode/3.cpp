@@ -6,6 +6,7 @@ public:
         int n = s.size();
         for (int start = 0, end = 0; end < n; end++){
             if (m[s[end]] != 0){
+                // 防止 abba，指针回退
                 start = max(m[s[end]], start);
             }
             m[s[end]] = end + 1;
