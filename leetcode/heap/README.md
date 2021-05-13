@@ -1,0 +1,1 @@
+1. 第 1046 题，最后一块石头的重量。不用真的建立堆，可以使用优先级队列。`priority_queue<int> q` 大顶堆；`priority_queue<int， vector<int>, greater<int> > q` 小顶堆。
