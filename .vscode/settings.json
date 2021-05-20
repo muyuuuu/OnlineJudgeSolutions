@@ -15,6 +15,8 @@
         "xhash": "cpp",
         "xtree": "cpp",
         "xutility": "cpp",
-        "array": "cpp"
+        "array": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp"
     }
 }
