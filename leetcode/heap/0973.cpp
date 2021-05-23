@@ -32,29 +32,27 @@
 
 // https://www.cnblogs.com/huashanqingzhu/p/11040390.html
 
-// class Solution {
-// public:
-//     vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
-//         priority_queue<pair<int, int>> q;
-//         for (int i = 0; i < K; ++i) {
-//             q.emplace(points[i][0] * points[i][0] + points[i][1] * points[i][1], i);
-//         }
-//         int n = points.size();
-//         for (int i = K; i < n; ++i) {
-//             int dist = points[i][0] * points[i][0] + points[i][1] * points[i][1];
-//             if (dist < q.top().first) {
-//                 q.pop();
-//                 q.emplace(dist, i);
-//             }
-//         }
-//         vector<vector<int>> ans;
-//         while (!q.empty()) {
-//             ans.push_back(points[q.top().second]);
-//             q.pop();
-//         }
-//         return ans;
-//     }
-// };
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        priority_queue<pair<int, int> > q;
+        for (int i = 0; i < k; i++) {
+            q.emplace(pow(points[i][0], 2) + pow(points[i][1], 2), i);
+        }
+        for (int i = k; i < points.size(); i++) {
+            if (pow(points[i][0], 2) + pow(points[i][1], 2) < q.top().first) {
+                q.pop();
+                q.emplace(pow(points[i][0], 2) + pow(points[i][1], 2), i);
+            }
+        }
+        vector<vector<int> > ans;
+        while (!q.empty()) {
+            ans.push_back(points[q.top().second]);
+            q.pop();
+        }
+        return ans;
+    }
+};
 
-// 执行用时：232 ms, 在所有 C++ 提交中击败了47.44%的用户
-// 内存消耗：52.1 MB, 在所有 C++ 提交中击败了52.49%的用户
+// 执行用时：192 ms, 在所有 C++ 提交中击败了70.66%的用户
+// 内存消耗：52 MB, 在所有 C++ 提交中击败了54.55%的用户
