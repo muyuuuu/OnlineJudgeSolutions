@@ -18,6 +18,7 @@
         "array": "cpp",
         "tuple": "cpp",
         "utility": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "numeric": "cpp"
     }
 }
