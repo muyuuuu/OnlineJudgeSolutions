@@ -19,6 +19,7 @@
         "tuple": "cpp",
         "utility": "cpp",
         "cmath": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "xiosbase": "cpp"
     }
 }
