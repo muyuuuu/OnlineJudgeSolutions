@@ -40,37 +40,30 @@
 //     }
 // };
 
-class Solution 
-{
+class Solution {
 public:
-    int findMaximizedCapital(int k, int W, vector<int>& Profits, vector<int>& Capital) 
-    {
-        int n = Profits.size();
-        priority_queue<int> q2;    //当前可以得到的利润，大根堆
-        // 门槛，可获得的利润，小根堆
-        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> q1;
-        for (int i = 0; i < n; i++)
-        {
-            q1.push(pair<int,int>(Capital[i], Profits[i]));
+    using PII = pair<int, int>;
+    int findMaximizedCapital(int k, int w, vector<int>& profits, vector<int>& capital) {
+        int n = profits.size();
+        priority_queue<int> m;
+        priority_queue<PII, vector<PII>, greater<PII>> q;
+        for (int i = 0; i < n; i++) {
+            q.emplace(capital[i], profits[i]);
         }
-        for (int ee = 0; ee < min(n, k); ee ++)
-        {
-            while (q1.size() && q1.top().first <= W)
-            {
-                q2.push(q1.top().second); //能开的项目，利润都记下来待选
-                q1.pop();
+        n = min(n, k);
+        for (int i = 0; i < n; i ++) {
+            while (!q.empty() && q.top().first <= w) {
+                m.push(q.top().second);
+                q.pop();
             }
-            if (q2.size())
-            {
-                W += q2.top();   //当前能获得的，最大的利润
-                q2.pop();
+            if (!m.empty()) {
+                w += m.top();
+                m.pop();
             }
             else
-            {
-                break;  //当前没有可以开的项目
-            }
+                break;
         }
-        return W;
+        return w;
     }
 };
 
