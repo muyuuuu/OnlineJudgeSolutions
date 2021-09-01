@@ -1,6 +1,6 @@
 # 链表
 
-1. 第 92 题，反转链表 II。设置 `dummyhead`，按照[这个题解](https://leetcode-cn.com/problems/reverse-linked-list-ii/solution/yi-ge-neng-ying-yong-suo-you-lian-biao-t-vjx6/)移动其中的指针，注意 `cur, prv` 的位置。
+1. 第 92 题，反转链表 II。有的时候不用真的反转，创建数组存储数据，然后反转数组对应位置的内容。而后开始遍历数据，如果不在反转范围内，使用旧数组，如果在反转范围内，使用反转后的数组，而后访问数组的数据创建新的节点即可。
 2. 第 206 题，反转链表。尝试去移动指针。
 3. 第 21 题，合并两个有序链表。`while (l1 != nullptr || l2 != nullptr)` 换为 while (l1 != nullptr && l2 != nullptr)，可以减少判断，使代码更简单。
 4. 剑指 offer 06 题，从尾到头打印链表。用一个 vector 存储数据，最后逆序 vector。

@@ -11,33 +11,44 @@
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
-        ListNode* dummy = new ListNode{0};
+
+        if (left == right)
+            return head;
+
+        vector<int> v1;
+        vector<int> v2;
+        
+        ListNode* dummy = new ListNode();
         dummy->next = head;
-
-        right -= left;
-        ListNode* hh = dummy;
-        while (left > 1) {
-            left--;
-            hh = hh->next;
+    
+        while (head != nullptr) {
+            v1.push_back(head->val);
+            head = head->next;
         }
 
-        ListNode* prv = hh->next;
-        ListNode* cur = prv->next;
+        v2.resize(v1.size());
+        v2.assign(v1.begin(), v1.end());
 
-        while (right > 0) {
-            ListNode* nxt = cur->next;
-            cur->next = prv;
-            prv = cur;
-            cur = nxt;
-            right--;
+        reverse(v2.begin()+left-1, v2.begin() + right);
+
+        ListNode* p = new ListNode();
+        dummy->next = p;
+        int h;
+        for (int i = 1; i <= v1.size(); i++) {
+            if (i >= left && i <=right)
+                h = v2[i-1];
+            else
+                h = v1[i-1];
+            ListNode* t = new ListNode(h);
+            if (i == 1)
+                dummy->next = t;
+            p->next = t;
+            p = t;
         }
-
-        hh->next->next = cur;
-        hh->next = prv;
 
         return dummy->next;
     }
 };
 
-// 执行用时：0 ms, 在所有 C++ 提交中击败了100.00%的用户
-// 内存消耗：7.1 MB, 在所有 C++ 提交中击败了97.48%的用户
+//执行用时：4 ms, 在所有 C++ 提交中击败了53.16%的用户
+//内存消耗：7.5 MB, 在所有 C++ 提交中击败了5.41%的用户
