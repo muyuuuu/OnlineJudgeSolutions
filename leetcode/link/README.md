@@ -23,3 +23,30 @@
 ---
 
 前面的题都是移动指针，但实际面试的题不一定需要自己去真的建立链表，回头整点其它题目。
+
+### 第 0025 题
+
+首先是反转链表的代码：
+
+```cpp
+ListNode* reverse(ListNode* a, ListNode* b) {
+    ListNode* pre = nullptr;
+    ListNode* cur = a;
+    ListNode* next = a;
+    while (cur != b) {
+        next = cur->next;
+        cur->next = pre;
+        pre = cur;
+        cur = next;
+    }
+    return pre;
+ }
+```
+
+- 建议背过这个代码。而后就是递归调用这个反转函数，确定要被反转的 `k` 组链表的 `a` 和 `b`。
+- 如果长度不够，那么不用反转。
+- 反转结束后，返回头节点，且尾节点指向下一个链表的头节点。
+
+### 第 234 题
+
+判断回文链表，其实不用真的判断，把链表存入数组，而后对数组逆序，判断两个数组元素是否相等即可。
