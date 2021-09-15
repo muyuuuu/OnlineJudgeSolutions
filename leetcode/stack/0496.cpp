@@ -1,29 +1,30 @@
 class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        unordered_map<int, int> m;
-        int s2 = nums2.size();
-        m[nums2[s2 - 1]] = -1;
-        bool flag{false};
-        for (int i = 0; i < s2 - 1; i++) {
-            flag = false;
-            for (int j = i + 1; j < s2; j++) {
-                if (nums2[j] > nums2[i]) {
-                    flag = true;
-                    m[nums2[i]] = nums2[j];
-                    break;
-                }
-            }
-            if (flag == false)
-                m[nums2[i]] = -1;
-        }
         vector<int> res;
-        for (auto& i : nums1) {
-            res.push_back(m[i]);
+
+        vector<int> v1;
+        v1.resize(10005);
+
+        stack<int> s;
+        for (int i = nums2.size() - 1; i >= 0; i--) {
+            while (!s.empty() && nums2[i] > s.top()) {
+                s.pop();
+            }
+            if (s.empty())
+                v1[nums2[i]] = -1;
+            else
+                v1[nums2[i]] = s.top();
+            s.push(nums2[i]);
         }
+
+        for (int i = 0; i < nums1.size(); i++) {
+            res.push_back(v1[nums1[i]]);
+        }
+
         return res;
     }
 };
 
-// 执行用时：8 ms, 在所有 C++ 提交中击败了60.74%的用户
-// 内存消耗：8.7 MB, 在所有 C++ 提交中击败了38.31%的用户
+// 执行用时： 4 ms , 在所有 C++ 提交中击败了 92.99% 的用户
+// 内存消耗： 8.9 MB , 在所有 C++ 提交中击败了 5.10% 的用户

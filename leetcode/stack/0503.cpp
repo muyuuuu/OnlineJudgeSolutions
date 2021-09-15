@@ -1,42 +1,36 @@
 class Solution {
 public:
     vector<int> nextGreaterElements(vector<int>& nums) {
-        unordered_map<int, deque<int> > m;
-        int s = nums.size();
-        bool flag{false};
+        vector<int> tmp;
         vector<int> res;
+        res.resize(nums.size());
+        stack<int> s;
 
-        for (int i = 0; i < s; i++) {
-            flag = false;
-            for (int j = i + 1; j < s; j++) {
-                if (nums[j] > nums[i]) {
-                    flag = true;
-                    m[nums[i]].push_back(nums[j]);
-                    break;
-                }
-            }
-            
-            if (flag == false) {
-                for (int j = 0; j < i; j++) {
-                    if (nums[j] > nums[i]) {
-                        flag = true;
-                        m[nums[i]].push_back(nums[j]);
-                        break;
-                    }
-                }
-            }
+        tmp.resize(nums.size());
+        tmp.assign(nums.begin(), nums.end());
+        tmp.insert(tmp.end(), nums.begin(), nums.end());
 
-            if (flag == false)
-                 m[nums[i]].push_back(-1);
+        for (int i = tmp.size() - 1; i > nums.size() - 1; i-- ) {
+            while (!s.empty() && tmp[i] > s.top()) {
+                s.pop();
+            }
+            s.push(tmp[i]);
         }
 
-        for (auto& i : nums) {
-            res.push_back(m[i].front());
-            m[i].pop_front();
+        for (int i = nums.size() - 1; i >= 0; i--) {
+            while (!s.empty() && nums[i] >= s.top()) {
+                s.pop();
+            }
+            if (s.empty())
+                res[i] = -1;
+            else
+                res[i] = s.top();
+            s.push(nums[i]);
         }
+    
         return res;
     }
 };
 
-// 执行用时：432 ms, 在所有 C++ 提交中击败了12.88%的用户
-// 内存消耗：90.7 MB, 在所有 C++ 提交中击败了5.03%的用户
+// 执行用时： 32 ms , 在所有 C++ 提交中击败了 75.19% 的用户
+// 内存消耗： 24.8 MB , 在所有 C++ 提交中击败了 9.32% 的用户
