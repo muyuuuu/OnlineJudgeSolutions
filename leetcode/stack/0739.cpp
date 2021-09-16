@@ -1,20 +1,30 @@
 class Solution {
+private:
+    using PII = pair<int, int>;
 public:
-    vector<int> dailyTemperatures(vector<int>& T) {
-        int n = T.size();
-        vector<int> ans(n);
-        stack<int> s;
-        for (int i = 0; i < n; ++i) {
-            while (!s.empty() && T[i] > T[s.top()]) {
-                int previousIndex = s.top();
-                ans[previousIndex] = i - previousIndex;
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+
+        stack<PII> s;
+        vector<int> res;
+        res.resize(temperatures.size());
+
+        for (int i = temperatures.size() - 1; i >= 0; i--) {
+            while (!s.empty() && temperatures[i] >= s.top().first) {
                 s.pop();
             }
-            s.push(i);
+
+            if (s.empty())
+                res[i] = 0;
+            else
+                res[i] = s.top().second - i;
+
+            s.push(pair(temperatures[i], i));
         }
-        return ans;
+
+        return res;
+
     }
 };
 
-// 执行用时：72 ms, 在所有 C++ 提交中击败了56.64%的用户
-// 内存消耗：38.7 MB, 在所有 C++ 提交中击败了63.97%的用户
+// 执行用时： 160 ms , 在所有 C++ 提交中击败了 42.09% 的用户
+// 内存消耗： 83.1 MB , 在所有 C++ 提交中击败了 90.55% 的用户
