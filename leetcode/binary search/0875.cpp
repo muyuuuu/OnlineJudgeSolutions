@@ -1,44 +1,46 @@
 class Solution {
 public:
-    int getTime(vector<int>& piles, int m, int h) {
-        int t{0};
-        for (auto& i : piles){
-            if (i % m == 0)
-                t += i / m;
+
+    int check(int m, vector<int>& piles, int h) {
+        int sum{0};
+        for (auto& i : piles) {
+            if (i % m == 0 && i / m == 0)
+                sum += 1;
+            else if (i % m == 0) {
+                sum += (i / m);
+            }
             else
-                t += (i / m + 1);
+                sum += (i / m + 1);
         }
-        if (t > h)
-            return 0;
-        return m;
+
+        if (sum <= h)
+            return 1;
+        return 0;
     }
+
     int minEatingSpeed(vector<int>& piles, int h) {
-        if (piles.size() == 1) {
-            if (piles[0] % h == 0)
-                return piles[0] / h;
-            else
-                return (piles[0] / h + 1);
-        }
         sort(piles.begin(), piles.end());
-        int l = 1, n = piles.size();
-        int r = piles[n-1], m;
-        int maxv = 1000000005;
+        int l = 1;
+        int r = *(piles.end() - 1);
+        int res = INT_MAX;
+
         while (l <= r) {
-            m = l + (r - l) / 2;
-            auto v = getTime(piles, m, h);
-            if (v) {
-                if (v < maxv) {
-                    maxv = v;
+            int m = l + (r - l) / 2;
+            int t = check(m, piles, h);
+            if (t == 0) {
+                l = m + 1;
+            }
+            else if (t == 1) {
+                if (m < res) {
+                    res = m;
                 }
                 r = m - 1;
             }
-            else {
-                l = m + 1;
-            }
         }
-        return maxv;
+
+        return res;
     }
 };
 
-// 执行用时：44 ms, 在所有 C++ 提交中击败了86.07%的用户
-// 内存消耗：18.4 MB, 在所有 C++ 提交中击败了24.55%的用户
+// 执行用时： 44 ms , 在所有 C++ 提交中击败了 50.07% 的用户
+// 内存消耗： 18.4 MB , 在所有 C++ 提交中击败了 40.18% 的用户
