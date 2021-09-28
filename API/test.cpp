@@ -1,16 +1,20 @@
-#include <vector>
+#include <map>
 #include <iostream>
 #include <iterator>
 #include <algorithm>
  
-int main()
-{
-    std::vector<int> v{1, 2, 3};
-    std::reverse(v.begin(), v.end());
-    for(auto e : v) std::cout << e;
-    std::cout << '\n';
- 
-    int a[] = {4, 5, 6, 7};
-    std::reverse(std::begin(a) + 1, std::end(a));
-    for(auto e : a) std::cout << e;
+int main(){
+
+    std::map<int, int> m1, m2;
+    for (int i = 1; i < 18; i++) {
+        m1[i] = i;
+    }
+
+    std::map<int, int>::iterator it1, it2;
+    it1 = m1.lower_bound(11);
+    it2 = m1.upper_bound(17);
+
+    std::cout << it2->first << "==" << it2->second << std::endl;
+
+    return 0;
 }
