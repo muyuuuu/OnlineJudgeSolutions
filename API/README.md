@@ -13,9 +13,9 @@
 
 `map` 位于头文件 `<map>`, `unordered_map` 位于头文件 `<unordered_map>`。`map` 会按照 `key` 升序排列。常用方法：
 
+| `m.count(key)` | 返回 `key` 在哈希表中的数量，1 或 0 | 是 |
 | 用法 | 效果 | 作用于当前变量 |
 |--|--|--|
-| `m.count(key)` | 返回 `key` 在哈希表中的数量，1 或 0 | 是 |
 | `m.clear()` | 清空哈希表 | 是 |
 | `m.erase(key)` | 删除哈希表中的 `key`  | 是 |
 | `m.erase(bit, eit)` | 删除哈希表中 `bit` 到 `eit` 之间的元素，左闭右开 | 是 |
@@ -23,6 +23,21 @@
 | `m.lower_bound(val)` | 返回第一个哈希表中 `key` 等于 `val` 的迭代器指针，否则返回 `m.end()` | 是 |
 | `m.upper_bound(val)` | 返回第一个哈希表中 `key` 大于 `val` 的迭代器指针，否则返回 `m.end()` | 是 |
 
+## vector
+
+这个是比较常见的容器，类似于 python 的列表吧。
+
+| 用法 | 效果 | 作用于当前变量 |
+|--|--|--|
+| `v1(n, v)` | 构造函数，`v1`中放入 `n` 个取值为 `v` 的元素 | 是 |
+| `back()` | 返回最有一个元素 | 是 |
+| `front()` | 返回第一个元素 | 是 |
+| `assign(n, v)` | 从开始指针到结束指针分配元素，或分配 `n` 个取值为 `v` 的元素 | 是 |
+| `insert(it, item)` | 在 `it` 位置之前插入 item，可以是单个元素，可以是迭代器| 是 |
+| `emplace(it, item)` | 可以理解为 `insert` 的变种，`insert` 插入为创建好的对象，`emplace` 可以不用创建直接插入 | 是 |
+| `push_back()` | 尾部追加 | 是 |
+| `emplace_back()` | 尾部追加，效果同 `emplace` | 是 |
+| `pop_back()` | 尾部弹出 | 是 |
 
 ## 数值
 
