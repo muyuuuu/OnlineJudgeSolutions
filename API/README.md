@@ -56,6 +56,17 @@
 
 包含在头文件 `deque` 中，双端队列，大部分 API 与 vector 相同，额外增加了头部的删除和插入操作，分别为 `push_front()` 和 `pop_front()`，以及相应的 `emplace` 版本。
 
+## priority\_queue
+
+包含在 `queue` 中，优先级队列。所以操作相对于其他容器而言少了一些，默认的为大顶堆，也就是弹出元素时，会弹出队列中最大的元素。如果要弹出最小的元素，需要进行额外的声明。`std::priority_queue<int, vector<int>, std::greater<int> > q`。
+
+| 用法 | 效果 | 作用于当前变量 |
+|--|--|--|
+| `q.push()` | 将元素添加到队列中，因为没有顺序之分，所以不是 `push_back`，同样还有 `emplace` | 是 |
+| `q.pop()` | 按优先级删除优先级最低的元素 | 是 |
+| `q.top()` | 访问优先级最高的元素 | 是 |
+| `q.swap()` | 和哈希表的 `swap` 用法相同 | 是 |
+
 ## 数值
 
 - `INT_MAX`，`INT_MIN` 来自头文件 `<climits>`
