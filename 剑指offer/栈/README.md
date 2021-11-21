@@ -1,3 +1,9 @@
+- [栈](#栈)
+  - [剑指 Offer 09. 用两个栈实现队列](#剑指-offer-09-用两个栈实现队列)
+  - [剑指 Offer 30. 包含min函数的栈](#剑指-offer-30-包含min函数的栈)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 # 栈
 
 ## 剑指 Offer 09. 用两个栈实现队列

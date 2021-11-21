@@ -1,3 +1,9 @@
+- [链表](#链表)
+  - [删除链表的节点，剑指 offer 18](#删除链表的节点剑指-offer-18)
+  - [两个链表的第一个公共节点，剑指 offer 52](#两个链表的第一个公共节点剑指-offer-52)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 # 链表
 
 ## 删除链表的节点，剑指 offer 18
