@@ -1,6 +1,7 @@
 - [链表](#链表)
   - [删除链表的节点，剑指 offer 18](#删除链表的节点剑指-offer-18)
   - [两个链表的第一个公共节点，剑指 offer 52](#两个链表的第一个公共节点剑指-offer-52)
+  - [剑指 Offer 25. 合并两个排序的链表](#剑指-offer-25-合并两个排序的链表)
 
 # 链表
 
@@ -56,6 +57,36 @@ public:
       }
     }
     return headB;
+  }
+};
+```
+
+## 剑指 Offer 25. 合并两个排序的链表
+
+首先判断两个链表哪个节点的数值小，选择数值最小的即可，然后对应链表的指针向后移动。但是有两个注意事项：
+
+1. 两个链表有指针为空后，另一个链表可能不为空，需要追加剩下的部分
+2. 创建额外的指针时，需要开辟空间，创建实体或者 new 都可以，不然 `p->next` 会失效
+
+```cpp
+class Solution {
+public:
+  ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+    ListNode* p = new ListNode();
+    ListNode* dummy = p;
+    while (l1 != nullptr && l2 != nullptr) {
+      if (l1->val < l2->val) {
+        p->next = l1;
+        l1 = l1->next;
+      }
+      else {
+        p->next = l2;
+        l2 = l2->next;
+      }
+      p = p->next;
+    }
+    p->next = l1 == nullptr ? l2 : l1;
+    return dummy->next;
   }
 };
 ```
