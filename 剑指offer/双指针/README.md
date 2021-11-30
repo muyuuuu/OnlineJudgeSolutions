@@ -1,5 +1,6 @@
 - [双指针](#双指针)
   - [剑指 Offer 21. 调整数组顺序使奇数位于偶数前面](#剑指-offer-21-调整数组顺序使奇数位于偶数前面)
+  - [剑指 Offer 22. 链表中倒数第k个节点](#剑指-offer-22-链表中倒数第k个节点)
 
 # 双指针
 
@@ -31,6 +32,31 @@ public:
         j--;
     }
     return nums;
+  }
+};
+```
+
+## 剑指 Offer 22. 链表中倒数第k个节点
+
+这个题第一次见是今年的 5 月份，没想到仍然记得题解。创建两个指针指向链表头：
+
+1. 第一个指针向后移动 k 步
+2. 两个指针同时向后移动，第一个指针为空时，返回第二个指针
+
+```cpp
+class Solution {
+public:
+  ListNode* getKthFromEnd(ListNode* head, int k) {
+    ListNode* p = head;
+    ListNode* p1 = head;
+    for (int i = 0; i < k; i++) {
+      p = p->next;
+    }
+    while (p != nullptr) {
+      p = p->next;
+      p1 = p1->next;
+    }
+    return p1;
   }
 };
 ```
