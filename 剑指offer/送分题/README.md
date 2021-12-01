@@ -1,6 +1,7 @@
 - [送分题](#送分题)
   - [剑指 Offer 05. 替换空格](#剑指-offer-05-替换空格)
   - [剑指 Offer 06. 从尾到头打印链表](#剑指-offer-06-从尾到头打印链表)
+  - [剑指 Offer 17. 打印从1到最大的n位数](#剑指-offer-17-打印从1到最大的n位数)
 
 # 送分题
 
@@ -40,6 +41,21 @@ public:
       head = head->next;
     }
     reverse(res.begin(), res.end());
+    return res;
+  }
+};
+```
+
+## 剑指 Offer 17. 打印从1到最大的n位数
+
+```cpp
+class Solution {
+public:
+  vector<int> printNumbers(int n) {
+    vector<int> res;
+    for (int i = 1; i < pow(10, n); i++) {
+      res.push_back(i);
+    }
     return res;
   }
 };

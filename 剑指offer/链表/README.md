@@ -2,6 +2,8 @@
   - [删除链表的节点，剑指 offer 18](#删除链表的节点剑指-offer-18)
   - [两个链表的第一个公共节点，剑指 offer 52](#两个链表的第一个公共节点剑指-offer-52)
   - [剑指 Offer 25. 合并两个排序的链表](#剑指-offer-25-合并两个排序的链表)
+  - [剑指 Offer 24. 反转链表](#剑指-offer-24-反转链表)
+  - [剑指 Offer 35. 复杂链表的复制](#剑指-offer-35-复杂链表的复制)
 
 # 链表
 
@@ -87,6 +89,60 @@ public:
     }
     p->next = l1 == nullptr ? l2 : l1;
     return dummy->next;
+  }
+};
+```
+
+## 剑指 Offer 24. 反转链表
+
+反转链表的标配模板。因为每次反转需要移动两个 next 的指针，因需要设置三个链表节点。然后通过这三个节点依次反转链表，如果是反转部分链表，那么条件就是 `while (curr != end)`。
+
+```cpp
+class Solution {
+public:
+  ListNode* reverseList(ListNode* head) {
+    ListNode* prev = nullptr;
+    ListNode* next = head;
+    ListNode* curr = head;
+    while (curr != nullptr) {
+      next = curr->next;
+      curr->next = prev;
+      prev = curr;
+      curr = next;
+    }
+    return prev;
+  }
+};
+```
+
+## 剑指 Offer 35. 复杂链表的复制
+
+请实现 copyRandomList 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 next 指针指向下一个节点，还有一个 random 指针指向链表中的任意节点或者 null。
+
+![](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/01/09/e1.png)
+
+之前做过这个题，但又忘记了。刚开始尝试直接复制，发现没办法复制 random 节点。官方题解里面的回溯不容易理解，所以还是用传统遍历的方法了。
+
+首先创建一个 map，key 是要复制的链表的节点，value 是新创建的节点，这里只记录数值，不记录指针关系。之后开始操作指针关系，由于 value 是新创建的节点，因此更改在指针关系时需要根据 map 中 key 的关系来操作 map 的 value。
+
+```cpp
+class Solution {
+public:
+  Node* copyRandomList(Node* head) {
+    unordered_map<Node*, Node*> m;
+    Node* p = head;
+    while (p != nullptr) {
+      m[p] = new Node(p->val);
+      p = p->next;
+    }
+    p = head;
+    while (p != nullptr) {
+      // 新节点的下一个节点仍然是新节点
+      m[p]->next = m[p->next];
+      m[p]->random = m[p->random];
+      p = p->next;
+    }
+    return m[head];
   }
 };
 ```
