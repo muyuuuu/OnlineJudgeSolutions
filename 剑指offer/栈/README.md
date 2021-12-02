@@ -1,6 +1,7 @@
 - [栈](#栈)
   - [剑指 Offer 09. 用两个栈实现队列](#剑指-offer-09-用两个栈实现队列)
   - [剑指 Offer 30. 包含min函数的栈](#剑指-offer-30-包含min函数的栈)
+  - [剑指 Offer 31. 栈的压入、弹出序列](#剑指-offer-31-栈的压入弹出序列)
 
 # 栈
 
@@ -98,4 +99,29 @@ public:
     return minn;
   }
 };
+```
+
+## 剑指 Offer 31. 栈的压入、弹出序列
+
+经典问题之一了，给定一个序列 a1 压入栈中，判断另一个序列 a2 是否是这个栈的合法弹出，直接进行模拟即可。先把给定序列压入栈 s1，压栈的时候进行判断，持续判断 s1 顶元素是否和弹出序列 a2 的首元素是否相等，如若相等，则弹栈。最后判断栈 s1 是否为空即可，为空，表示按照弹出序列的顺序把栈的元素全部弹出，为 true。
+
+```cpp
+class Solution {
+  public:
+    bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+      stack<int> s1;
+      stack<int> s2;
+      int cnt{0};
+      for (int i = 0; i < pushed.size(); i++) {
+        s1.push(pushed[i]);
+        while (s1.size() && s1.top() == popped[cnt]) {
+          s1.pop();
+          cnt++;
+        }
+      }
+      if (s1.size() == 0)
+        return true;
+      return false;
+    }
+  };
 ```

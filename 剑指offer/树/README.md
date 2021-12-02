@@ -1,6 +1,7 @@
 - [树](#树)
   - [剑指 Offer 26. 树的子结构](#剑指-offer-26-树的子结构)
   - [剑指 Offer 27. 二叉树的镜像](#剑指-offer-27-二叉树的镜像)
+  - [剑指 Offer 36. 二叉搜索树与双向链表](#剑指-offer-36-二叉搜索树与双向链表)
 
 # 树
 
@@ -69,4 +70,44 @@ public:
     reverse(root->right);
   }
 };
+```
+
+## 剑指 Offer 36. 二叉搜索树与双向链表
+
+输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向。
+
+![](tree2link.png)
+
+既然题目不允许新建节点，意思就是：不允许存储并排序二叉树遍历的结果，而后对排序的序列创建链表。二叉搜索树在左根右的情况下遍历是有序的，因此中序遍历二叉树而后调整指针指向。由于是双向链表，因此必须加入 prev, curr 和 next 指针，由于题目遍历二叉树的过程会自动遍历节点，不需要 next 节点向后搜索且默认提供了 curr 节点，因此只额外引入 prev 节点。
+
+遍历期间，需要保留二叉树最左侧的节点，其左侧指向空指针。对于其他节点，当前指针的左侧是 prev 指针，prev 的右指针是当前指针，而后移动 prev 到当前指针即可。最后进行收尾工作，链表的头节点的左指针指向尾节点，尾节点的右指针指向头节点。
+
+```cpp
+class Solution {
+  public:
+    Node* curr = nullptr;
+    Node* prev = nullptr;
+    
+    Node* treeToDoublyList(Node* root) {
+      if (root == nullptr)
+        return nullptr;
+      inorder(root);
+      curr->left = prev;
+      prev->right = curr;
+      return curr;
+    }
+    void inorder(Node* node) {
+      if (node == nullptr)
+        return;
+      inorder(node->left);
+      if (prev != nullptr) {
+        prev->right = node;
+      } else {
+        curr = node;
+      }
+      node->left = prev;
+      prev = node;
+      inorder(node->right);
+    }
+  };
 ```
