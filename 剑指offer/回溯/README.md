@@ -1,5 +1,6 @@
 - [回溯](#回溯)
   - [剑指 Offer 12. 矩阵中的路径](#剑指-offer-12-矩阵中的路径)
+  - [剑指 Offer 38. 字符串的排列](#剑指-offer-38-字符串的排列)
 
 # 回溯
 
@@ -87,6 +88,53 @@ public:
       }
     }
     return false;
+  }
+};
+```
+
+## 剑指 Offer 38. 字符串的排列
+
+回溯还需要系统的整理，自己对回溯的拿捏不是很好。比如这个题，想不到如何处理重复字符如 `aab`，于是用了集合，集合在转 vector，属实摆烂。
+
+```cpp
+class Solution {
+public:
+  vector<string> res;
+  string tmp{""};
+  set<string> s1;
+  unordered_map<char, int> m1;
+  vector<string> permutation(string s) {
+    for (auto i : s) {
+      m1[i] ++;
+    }
+    for (auto i : s) {
+      tmp += i;
+      m1[i]--;
+      backtrack(s, tmp);
+      tmp.erase(tmp.end()-1);
+      m1[i]++;
+    }
+    res.resize(s1.size());
+    copy(s1.begin(), s1.end(), res.begin());
+    return res;
+  }
+
+  void backtrack(string& s, string& tmp) {
+    if (tmp.size() == s.size()) {
+      s1.insert(tmp);
+      return;
+    }
+    for (int i = 0; i < s.size(); i++) {
+      if (m1[s[i]] <= 0)
+        continue;
+      else {
+        tmp += s[i];
+        m1[s[i]]--;
+        backtrack(s, tmp);
+        tmp.erase(tmp.end() - 1);
+        m1[s[i]]++;
+      }
+    }
   }
 };
 ```

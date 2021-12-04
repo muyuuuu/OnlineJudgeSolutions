@@ -2,6 +2,7 @@
   - [剑指 Offer 26. 树的子结构](#剑指-offer-26-树的子结构)
   - [剑指 Offer 27. 二叉树的镜像](#剑指-offer-27-二叉树的镜像)
   - [剑指 Offer 36. 二叉搜索树与双向链表](#剑指-offer-36-二叉搜索树与双向链表)
+  - [剑指 Offer 37. 序列化二叉树](#剑指-offer-37-序列化二叉树)
 
 # 树
 
@@ -110,4 +111,66 @@ class Solution {
       inorder(node->right);
     }
   };
+```
+
+## 剑指 Offer 37. 序列化二叉树
+
+其实就是二叉树转字符串，在从字符串转回二叉树。那么就有几个注意事项：
+
+1. 二叉树转字符串，建议用先序遍历，这样字符串返回二叉树的时候也简单
+2. 二叉树如何转字符串，字符串就如何返回二叉树，都是递归；二叉树到字符串需要额外的函数，那么字符串到二叉树也需要额外的函数
+3. 二叉树到字符串时，避免 12 被解析为 1 和 2，建议每个数字后加一个空格，空指针用特殊字符表示
+4. 那么在字符串到二叉树时，就需要将带空格的字符串解析到一个 vecotr 中拿到数字，可以借助 `stringstream` 实现，位于头文件 `<sstream>` 中。
+
+```cpp
+class Codec {
+public:
+
+  string res{""};
+  int idx{0};
+  // Encodes a tree to a single string.
+  string serialize(TreeNode* root) {
+    dfs(root);
+    return res;
+  }
+
+  void dfs(TreeNode* node) {
+    if (node == nullptr) {
+      res += '#';
+      res += ' ';
+      return;
+    }
+    res += to_string(node->val);
+    res += ' ';
+    dfs(node->left);
+    dfs(node->right);
+  }
+
+  // Decodes your encoded data to tree.
+  TreeNode* deserialize(string data) {
+    stringstream ss(data);
+    vector<string> token;
+    string buf;
+    while (ss >> buf) {
+      token.push_back(buf);
+    }
+    
+    if (token.size() == 1 && token[0] == "#")
+      return nullptr;
+    TreeNode* root = build(token);
+    return root;
+  }
+
+  TreeNode* build(vector<string>& token) {
+    if (token[idx] == "#" || idx >= token.size()) {
+      idx ++;
+      return nullptr;
+    }
+    TreeNode* node = new TreeNode(stoi(token[idx]));
+    idx++;
+    node->left = build(token);
+    node->right = build(token);
+    return node;
+  }
+};
 ```
