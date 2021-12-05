@@ -2,6 +2,8 @@
   - [剑指 Offer 05. 替换空格](#剑指-offer-05-替换空格)
   - [剑指 Offer 06. 从尾到头打印链表](#剑指-offer-06-从尾到头打印链表)
   - [剑指 Offer 17. 打印从1到最大的n位数](#剑指-offer-17-打印从1到最大的n位数)
+  - [剑指 Offer 39. 数组中出现次数超过一半的数字](#剑指-offer-39-数组中出现次数超过一半的数字)
+  - [剑指 Offer 50. 第一个只出现一次的字符](#剑指-offer-50-第一个只出现一次的字符)
 
 # 送分题
 
@@ -57,6 +59,44 @@ public:
       res.push_back(i);
     }
     return res;
+  }
+};
+```
+
+## 剑指 Offer 39. 数组中出现次数超过一半的数字
+
+```cpp
+class Solution {
+public:
+  int majorityElement(vector<int>& nums) {
+    unordered_map<int, int> m1;
+    int n = nums.size() / 2;
+    for (auto i : nums) {
+      m1[i]++;
+      if (m1[i] > n)
+        return i;
+    }
+    return 0;
+  }
+};
+```
+
+## 剑指 Offer 50. 第一个只出现一次的字符
+
+```cpp
+class Solution {
+public:
+  // using PCI = pair<char, int>;
+  char firstUniqChar(string s) {
+    int arr[26] = {0};
+    for (auto i : s) {
+      arr[i - 'a'] += 1;
+    }
+    for (auto i : s) {
+      if (arr[i - 'a'] == 1)
+        return i;
+    }
+    return ' ';
   }
 };
 ```

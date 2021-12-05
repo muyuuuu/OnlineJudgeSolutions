@@ -1,6 +1,7 @@
 - [回溯](#回溯)
   - [剑指 Offer 12. 矩阵中的路径](#剑指-offer-12-矩阵中的路径)
   - [剑指 Offer 38. 字符串的排列](#剑指-offer-38-字符串的排列)
+  - [剑指 Offer 34. 二叉树中和为某一值的路径](#剑指-offer-34-二叉树中和为某一值的路径)
 
 # 回溯
 
@@ -135,6 +136,50 @@ public:
         m1[s[i]]++;
       }
     }
+  }
+};
+```
+
+## 剑指 Offer 34. 二叉树中和为某一值的路径
+
+这个题也算是二叉树中的经典问题了，求路径的和等于目标数值。关于递归：定义一个递归函数，然后无条件相信他。在递归函数中：
+
+1. 进入递归函数，记录当前节点的数值
+2. 如果是叶子节点，判断和是否满足目标值
+3. 否则，继续向下遍历
+4. 因为一条路径不满足需要回退掉之前叶子节点的值，所以在遍历结束后，需要删除之前添加节点的数值
+
+```cpp
+class Solution {
+public:
+  vector<vector<int>> res;
+  int sumv{0};
+  vector<int> tmp;
+  vector<vector<int>> pathSum(TreeNode* root, int target) {
+    sumv = target;
+    dfs(root);
+    return res;
+  }
+
+  int calc_sum(vector<int>& v) {
+    int sum{0};
+    for (auto i : v)
+      sum += i;
+    return sum;
+  }
+
+  void dfs(TreeNode* node) {
+    if (node == nullptr)
+      return;
+    tmp.push_back(node->val);
+    if (node->left == nullptr && node->right == nullptr) {
+      if (calc_sum(tmp) == sumv) {
+        res.push_back(tmp);
+      }
+    }
+    dfs(node->left);
+    dfs(node->right);
+    tmp.pop_back();  
   }
 };
 ```

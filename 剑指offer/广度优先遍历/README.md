@@ -1,6 +1,7 @@
 - [广度优先遍历](#广度优先遍历)
   - [剑指 Offer 32 - I. 从上到下打印二叉树](#剑指-offer-32---i-从上到下打印二叉树)
   - [剑指 Offer 32 - II. 从上到下打印二叉树 II](#剑指-offer-32---ii-从上到下打印二叉树-ii)
+  - [剑指 Offer 32 - III. 从上到下打印二叉树 III](#剑指-offer-32---iii-从上到下打印二叉树-iii)
 
 # 广度优先遍历
 
@@ -78,6 +79,53 @@ public:
       res.push_back(tmp);
       tmp.clear();
     }
+    return res;
+  }
+};
+```
+
+## 剑指 Offer 32 - III. 从上到下打印二叉树 III
+
+这个是「之」字形打印，但是遇到特殊的二叉树时不太容易处理：
+
+![](2021-12-05_14-44.png)
+
+所以就正常顺序遍历，最后对结果进行逆序。
+
+```cpp
+class Solution {
+public:
+  vector<vector<int>> levelOrder(TreeNode* root) {
+    if (root == nullptr)
+      return {};
+    
+    vector<vector<int>> res;
+    vector<int> tmp;
+    deque<TreeNode*> q;
+    q.push_back(root);
+    int idx{0};
+    
+    while (q.size()) {
+      int s = q.size();
+      for (int i = 0; i < s; i++) {
+        auto node = q.front();
+        q.pop_front();
+        tmp.push_back(node->val);
+        if (node->left != nullptr)
+          q.push_back(node->left);
+        if (node->right != nullptr)
+          q.push_back(node->right);
+      }
+      res.push_back(tmp);
+      tmp.clear();
+    }
+
+    for (int i = 0; i < res.size(); i++) {
+      if (i % 2 == 1) {
+        reverse(res[i].begin(), res[i].end());
+      }
+    }
+
     return res;
   }
 };
