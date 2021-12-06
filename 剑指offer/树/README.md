@@ -3,6 +3,7 @@
   - [剑指 Offer 27. 二叉树的镜像](#剑指-offer-27-二叉树的镜像)
   - [剑指 Offer 36. 二叉搜索树与双向链表](#剑指-offer-36-二叉搜索树与双向链表)
   - [剑指 Offer 37. 序列化二叉树](#剑指-offer-37-序列化二叉树)
+  - [剑指 Offer 55 - I. 二叉树的深度](#剑指-offer-55---i-二叉树的深度)
 
 # 树
 
@@ -171,6 +172,33 @@ public:
     node->left = build(token);
     node->right = build(token);
     return node;
+  }
+};
+```
+
+## 剑指 Offer 55 - I. 二叉树的深度
+
+由于每次递归调用的递归函数中会存储属于自己的临时变量，因此不需要回溯。
+
+```cpp
+class Solution {
+public:
+  int res{-1};
+  int maxDepth(TreeNode* root) {
+    if (root == NULL)
+      return 0;
+    int depth = 0;
+    dfs(root, depth + 1);
+    return res;
+  }
+
+  void dfs(TreeNode* node, int depth) {
+    if (node == NULL)
+      return;
+    if (depth > res)
+      res = depth;
+    dfs(node->left, depth+1);
+    dfs(node->right, depth+1);
   }
 };
 ```
