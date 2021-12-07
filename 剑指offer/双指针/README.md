@@ -1,6 +1,7 @@
 - [双指针](#双指针)
   - [剑指 Offer 21. 调整数组顺序使奇数位于偶数前面](#剑指-offer-21-调整数组顺序使奇数位于偶数前面)
   - [剑指 Offer 22. 链表中倒数第k个节点](#剑指-offer-22-链表中倒数第k个节点)
+  - [剑指 Offer 57. 和为s的两个数字](#剑指-offer-57-和为s的两个数字)
 
 # 双指针
 
@@ -57,6 +58,33 @@ public:
       p1 = p1->next;
     }
     return p1;
+  }
+};
+```
+
+## 剑指 Offer 57. 和为s的两个数字
+
+既然数组是有序的，很容易往二分那边想，而二分用的也是双指针。对于这个题而言：
+
+- 如果大于，右指针左移
+- 如果小于，左指针右移
+- 如果等于，返回结果
+
+```cpp
+class Solution {
+public:
+  vector<int> twoSum(vector<int>& nums, int target) {
+    int i = 0, j = nums.size() - 1;
+    while (i < j) {
+      if (nums[i] + nums[j] > target)
+        j -= 1;
+      else if (nums[i] + nums[j] < target)
+        i += 1;
+      else {
+        return {nums[i], nums[j]};
+      }
+    }
+    return {-1, -1};
   }
 };
 ```

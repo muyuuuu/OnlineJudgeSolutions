@@ -4,6 +4,8 @@
   - [剑指 Offer 17. 打印从1到最大的n位数](#剑指-offer-17-打印从1到最大的n位数)
   - [剑指 Offer 39. 数组中出现次数超过一半的数字](#剑指-offer-39-数组中出现次数超过一半的数字)
   - [剑指 Offer 50. 第一个只出现一次的字符](#剑指-offer-50-第一个只出现一次的字符)
+  - [剑指 Offer 57. 和为s的两个数字](#剑指-offer-57-和为s的两个数字)
+  - [剑指 Offer 56 - II. 数组中数字出现的次数 II](#剑指-offer-56---ii-数组中数字出现的次数-ii)
 
 # 送分题
 
@@ -97,6 +99,42 @@ public:
         return i;
     }
     return ' ';
+  }
+};
+```
+
+## 剑指 Offer 57. 和为s的两个数字
+
+```cpp
+class Solution {
+public:
+  unordered_map<int, int> m1;
+  vector<int> twoSum(vector<int>& nums, int target) {
+    for (auto i : nums) {
+      if (m1[i] == 1) {
+        return {target - i, i};
+      }
+      m1[target - i] = 1;
+    } 
+    return {0, 0};
+  }
+};
+```
+
+## 剑指 Offer 56 - II. 数组中数字出现的次数 II
+
+```cpp
+class Solution {
+public:
+  unordered_map<int, int> m1;
+  int singleNumber(vector<int>& nums) {
+    int tmp = 0;
+    for (auto i : nums)
+      m1[i] ++;
+    for (auto i : nums)
+      if (m1[i] == 1)
+        return i;
+    return -1;
   }
 };
 ```
