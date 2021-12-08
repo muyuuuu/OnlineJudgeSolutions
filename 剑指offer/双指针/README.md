@@ -2,6 +2,7 @@
   - [剑指 Offer 21. 调整数组顺序使奇数位于偶数前面](#剑指-offer-21-调整数组顺序使奇数位于偶数前面)
   - [剑指 Offer 22. 链表中倒数第k个节点](#剑指-offer-22-链表中倒数第k个节点)
   - [剑指 Offer 57. 和为s的两个数字](#剑指-offer-57-和为s的两个数字)
+  - [剑指 Offer 57 - II. 和为s的连续正数序列](#剑指-offer-57---ii-和为s的连续正数序列)
 
 # 双指针
 
@@ -85,6 +86,57 @@ public:
       }
     }
     return {-1, -1};
+  }
+};
+```
+
+## 剑指 Offer 57 - II. 和为s的连续正数序列
+
+其实实在不行可以暴力的。设置第一个指针 l，第二个指针 r = l + 1，之后移动右指针：
+- 和小于 target，r 右移
+- 等于 target，追加结果，l 右移
+- 大于 target，l 右移
+
+但是 l 右移需要讨论：
+1. 如果是和等于 target 后，l 需要右移 x 个单位，x 个单位的和需要等于 r 右移一个单位的值
+2. 如果和大于 target 后，l 右移一位，其实相当于模拟了
+
+```cpp
+class Solution {
+public:
+  vector<vector<int>> findContinuousSequence(int target) {
+    int l = 0, sum = 0, sum1 = 0;
+    vector<vector<int>> res;
+    vector<int> tmp;
+    int r;
+    for (l = 1; l <= target / 2; ) {
+      r = l + 1;
+      sum = l + r;
+      tmp.push_back(l);
+      tmp.push_back(r);
+      while (target > sum) {
+        r ++;
+        sum += r;
+        tmp.push_back(r);
+      }
+      if (target == sum) {
+        res.push_back(tmp);
+        tmp.clear();
+      }
+      if (tmp.size() == 0) {
+        r++;
+        while (sum1 < r) {
+          sum1 += l;
+          l++;
+        }
+      }
+      else
+        l++;
+      sum = 0;
+      sum1 = 0;
+      tmp.clear();
+    }
+    return res;
   }
 };
 ```
