@@ -3,6 +3,7 @@
   - [剑指 Offer 10- II. 青蛙跳台阶问题](#剑指-offer-10--ii-青蛙跳台阶问题)
   - [剑指 Offer 10- I. 斐波那契数列](#剑指-offer-10--i-斐波那契数列)
   - [剑指 Offer 46. 把数字翻译成字符串](#剑指-offer-46-把数字翻译成字符串)
+  - [剑指 Offer 47. 礼物的最大价值](#剑指-offer-47-礼物的最大价值)
 
 # 动态规划
 
@@ -109,6 +110,40 @@ public:
     }
     
     return dp[n];
+  }
+};
+```
+
+## 剑指 Offer 47. 礼物的最大价值
+
+典型的二维动态规划，先对矩阵的行和列设置初值；而后其余部分的取值来源有两个方向，按照位置进行 dp 即可。
+
+```cpp
+class Solution {
+public:
+  int maxValue(vector<vector<int>>& grid) {
+    int row = grid.size();
+    if (row == 0)
+      return 0;
+    int col = grid[0].size();
+    vector<vector<int>> dp(row, vector<int>(col, 0));
+    dp[0][0] = grid[0][0];
+    for (int i = 1; i < col; i++) {
+      dp[0][i] = (dp[0][i-1] + grid[0][i]);
+    }
+    for (int i = 1; i < row; i++) {
+      dp[i][0] = (dp[i-1][0] + grid[i][0]);
+    }
+    for (int i = 1; i < row; i++) {
+      for (int j = 1; j < col; j++) {
+        dp[i][j] = max(dp[i-1][j], dp[i][j-1]) + grid[i][j];
+      }
+    }
+    int maxn{-1};
+    for (int i = 0; i < col; i++) {
+      maxn = max(maxn, dp[row-1][i]);
+    }
+    return maxn;
   }
 };
 ```

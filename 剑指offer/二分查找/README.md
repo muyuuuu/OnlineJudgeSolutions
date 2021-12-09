@@ -1,6 +1,7 @@
 - [二分查找](#二分查找)
   - [剑指 Offer 04. 二维数组中的查找](#剑指-offer-04-二维数组中的查找)
   - [剑指 Offer 11. 旋转数组的最小数字](#剑指-offer-11-旋转数组的最小数字)
+  - [剑指 Offer 53 - I. 在排序数组中查找数字 I](#剑指-offer-53---i-在排序数组中查找数字-i)
 
 # 二分查找
 
@@ -79,3 +80,60 @@ public:
 ```
 
 为什么 `r=mid` 而不是 `r=mid-1` 呢？明明是比区间搜索，`mid` 判断过一次不应该在判断了啊？这里需要注意的是：`numbers[mid]` 可能不是最小值，也可能是最小值。传统二分需要比较 `numbers[mid]` 和 `target` 的大小关系，但是这道题没有 `target`，也就是与众不同的地方。如果 `numbers[mid]` 是最小值，那么 `r=mid-1` 会直接错过最小值的搜索范围，看来二分搜索还需要灵活变化。
+
+## 剑指 Offer 53 - I. 在排序数组中查找数字 I
+
+基本的使用二分法查找左右边界，这次没有使用库函数偷懒，而是自己写的。在返回右侧编辑的时候需要注意，判断以及返回的都是 `l-1`
+。
+
+```cpp
+class Solution {
+public:
+
+  int left_bound(vector<int>& nums, int target) {
+    int n = nums.size();
+    int l = 0, r = n - 1;
+    while(l <= r) {
+      int mid = l + (r - l) / 2;
+      if (nums[mid] == target) {
+        r = mid - 1;
+      }
+      else if (nums[mid] > target)
+        r = mid - 1;
+      else
+        l = mid + 1;
+    }
+    if (l < 0 || l >= n)
+      return -1;
+    return nums[l] == target ? l : -1;
+  }
+
+  int right_bound(vector<int>& nums, int target) {
+    int n = nums.size();
+    int l = 0, r = n - 1;
+    while(l <= r) {
+      int mid = l + (r - l) / 2;
+      if (nums[mid] == target) {
+        l = mid + 1;
+      }
+      else if (nums[mid] > target)
+        r = mid - 1;
+      else
+        l = mid + 1;
+    }
+    if (l-1 < 0 || l-1 >= n)
+      return -1;
+    return nums[l-1] == target ? l-1 : -1;
+  }
+
+  int search(vector<int>& nums, int target) {
+    if (nums.size() == 0)
+      return 0;
+    auto a = left_bound(nums, target);
+    if (a == -1)
+      return 0;
+    auto b = right_bound(nums, target);
+    return b - a + 1;
+  }
+};
+```

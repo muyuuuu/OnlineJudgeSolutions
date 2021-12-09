@@ -6,6 +6,7 @@
   - [剑指 Offer 50. 第一个只出现一次的字符](#剑指-offer-50-第一个只出现一次的字符)
   - [剑指 Offer 57. 和为s的两个数字](#剑指-offer-57-和为s的两个数字)
   - [剑指 Offer 56 - II. 数组中数字出现的次数 II](#剑指-offer-56---ii-数组中数字出现的次数-ii)
+  - [剑指 Offer 58 - I. 翻转单词顺序](#剑指-offer-58---i-翻转单词顺序)
 
 # 送分题
 
@@ -135,6 +136,35 @@ public:
       if (m1[i] == 1)
         return i;
     return -1;
+  }
+};
+```
+
+## 剑指 Offer 58 - I. 翻转单词顺序
+
+不得不说 stringstream 真的好用。
+
+```cpp
+class Solution {
+public:
+  string reverseWords(string s) {
+    stringstream ss(s);
+    string tmp;
+    vector<string> res;
+    while (ss >> tmp) {
+      res.push_back(tmp);
+    }
+    reverse(res.begin(), res.end());
+    string a{""};
+    for (int i = 0; i < res.size(); i++) {
+      if (i == 0)
+        a += res[i];
+      else {
+        a += " ";
+        a += res[i];
+      }
+    }
+    return a;
   }
 };
 ```
