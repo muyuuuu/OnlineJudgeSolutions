@@ -4,6 +4,7 @@
   - [剑指 Offer 36. 二叉搜索树与双向链表](#剑指-offer-36-二叉搜索树与双向链表)
   - [剑指 Offer 37. 序列化二叉树](#剑指-offer-37-序列化二叉树)
   - [剑指 Offer 55 - I. 二叉树的深度](#剑指-offer-55---i-二叉树的深度)
+  - [剑指 Offer 54. 二叉搜索树的第k大节点](#剑指-offer-54-二叉搜索树的第k大节点)
 
 # 树
 
@@ -199,6 +200,33 @@ public:
       res = depth;
     dfs(node->left, depth+1);
     dfs(node->right, depth+1);
+  }
+};
+```
+
+## 剑指 Offer 54. 二叉搜索树的第k大节点
+
+这个题目考察的是二叉树的遍历，因为二叉搜索树是有序的，那么右根左这样遍历到第 k 次，就是第 k 大的节点。
+
+```cpp
+class Solution {
+public:
+  int res, num = 0;
+  int kthLargest(TreeNode* root, int k) {
+    num = k;
+    inorder(root);
+    return res;
+  }
+  void inorder(TreeNode* node) {
+    if (node == NULL)
+      return;
+    inorder(node->right);
+    num --;
+    if (num == 0) {
+      res = node->val;
+      return;
+    }
+    inorder(node->left);
   }
 };
 ```
