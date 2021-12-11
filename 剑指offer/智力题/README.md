@@ -1,5 +1,6 @@
 - [智力题](#智力题)
   - [剑指 Offer 45. 把数组排成最小的数](#剑指-offer-45-把数组排成最小的数)
+  - [剑指 Offer 66. 构建乘积数组](#剑指-offer-66-构建乘积数组)
 
 # 智力题
 
@@ -24,6 +25,36 @@ public:
     string res{""};
     for (auto i : tmp)
       res += i;
+    return res;
+  }
+};
+```
+
+## 剑指 Offer 66. 构建乘积数组
+
+题解上写的是上下三角，但我觉得把它理解成智力题会好一些。首先不能用除法，因为除法会出现 0 的情况，难以处理。
+
+1. 正向乘法的时候，从 1 开始遍历，输入数组累积相乘放入 res，但放过最后一个，那么 res[i] 就是除去最后一个元素相乘的结果
+2. 之后在反向乘法，从末尾往前遍历累计相乘，但放过 res 的当前元素，就是除去当前元素的相乘结果，可以理解为某种程度的哈希
+
+其实我感觉我没说清楚，还是看代码吧。
+
+```cpp
+class Solution {
+public:
+  vector<int> constructArr(vector<int>& a) {
+    int n = a.size();
+    if (n == 0)
+      return {};
+    vector<int> res(n, 1);
+    for (int i = 1; i < n; i++) {
+      res[i] = res[i - 1] * a[i - 1];
+    }
+    int tmp{1};
+    for (int i = n - 2; i >= 0; i--) {
+      tmp *= a[i + 1];
+      res[i] *= tmp;
+    }
     return res;
   }
 };
