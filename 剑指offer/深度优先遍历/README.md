@@ -1,37 +1,7 @@
 - [深度优先遍历](#深度优先遍历)
-  - [剑指 Offer 28. 对称的二叉树](#剑指-offer-28-对称的二叉树)
   - [剑指 Offer 13. 机器人的运动范围](#剑指-offer-13-机器人的运动范围)
 
 # 深度优先遍历
-
-## 剑指 Offer 28. 对称的二叉树
-
-请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。对于 `bfs` 这种递归调用的算法而言，定义一个递归函数，然后无条件相信它。这个题树章节的树的子结构类似，定义一个函数：
-
-1. 如果都为空，说明遍历完毕，返回 true
-2. 如果其中一个空，另外一个不是空，或者两者数值不等，返回 false
-3. 否则，返回子节点的遍历结果
-
-```cpp
-class Solution {
-public:
-  bool isSymmetric(TreeNode* root) {
-    if (root == nullptr)
-      return true;
-    return dfs(root->left, root->right);
-  }
-
-  bool dfs(TreeNode* node1, TreeNode* node2) {
-    if (node1 == nullptr && node2 == nullptr) {
-      return true;
-    }
-    if (node1 == nullptr || node2 == nullptr || node1->val != node2->val) {
-      return false;
-    }
-    return dfs(node1->left, node2->right) && dfs(node1->right, node2->left);
-  }
-};
-```
 
 ## 剑指 Offer 13. 机器人的运动范围
 

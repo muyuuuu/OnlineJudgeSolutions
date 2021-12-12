@@ -1,10 +1,13 @@
 - [树](#树)
   - [剑指 Offer 26. 树的子结构](#剑指-offer-26-树的子结构)
+  - [剑指 Offer 28. 对称的二叉树](#剑指-offer-28-对称的二叉树)
   - [剑指 Offer 27. 二叉树的镜像](#剑指-offer-27-二叉树的镜像)
   - [剑指 Offer 36. 二叉搜索树与双向链表](#剑指-offer-36-二叉搜索树与双向链表)
   - [剑指 Offer 37. 序列化二叉树](#剑指-offer-37-序列化二叉树)
   - [剑指 Offer 55 - I. 二叉树的深度](#剑指-offer-55---i-二叉树的深度)
   - [剑指 Offer 54. 二叉搜索树的第k大节点](#剑指-offer-54-二叉搜索树的第k大节点)
+  - [剑指 Offer 55 - II. 平衡二叉树](#剑指-offer-55---ii-平衡二叉树)
+  - [剑指 Offer 68 - II. 二叉树的最近公共祖先](#剑指-offer-68---ii-二叉树的最近公共祖先)
 
 # 树
 
@@ -45,6 +48,35 @@ public:
     if (A->val != B->val)
       return false;
     return dfs(A->left, B->left) && dfs(A->right, B->right);
+  }
+};
+```
+
+## 剑指 Offer 28. 对称的二叉树
+
+请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。对于 `bfs` 这种递归调用的算法而言，定义一个递归函数，然后无条件相信它。这个题树章节的树的子结构类似，定义一个函数：
+
+1. 如果都为空，说明遍历完毕，返回 true
+2. 如果其中一个空，另外一个不是空，或者两者数值不等，返回 false
+3. 否则，返回子节点的遍历结果
+
+```cpp
+class Solution {
+public:
+  bool isSymmetric(TreeNode* root) {
+    if (root == nullptr)
+      return true;
+    return dfs(root->left, root->right);
+  }
+
+  bool dfs(TreeNode* node1, TreeNode* node2) {
+    if (node1 == nullptr && node2 == nullptr) {
+      return true;
+    }
+    if (node1 == nullptr || node2 == nullptr || node1->val != node2->val) {
+      return false;
+    }
+    return dfs(node1->left, node2->right) && dfs(node1->right, node2->left);
   }
 };
 ```
@@ -227,6 +259,61 @@ public:
       return;
     }
     inorder(node->left);
+  }
+};
+```
+
+## 剑指 Offer 55 - II. 平衡二叉树
+
+输入一棵二叉树的根节点，判断该树是不是平衡二叉树。如果某二叉树中任意节点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。想不到有一天被简单题难到了，其实还是递归理解的不到位。需要注意的是，以下的图也是平衡二叉树。
+
+![](balance-tree.png)
+
+通过上图，我们可以理解为：二叉树的左右子树的深度是取得最大值。通过递归遍历，返回子树的最大深度，如果差值大于 1，返回 -1。判断最终结果是不是 -1 即可。
+
+```cpp
+class Solution {
+public:
+  bool isBalanced(TreeNode* root) {
+    return dfs(root) >= 0;
+  }
+  int dfs(TreeNode* node) {
+    if (node == nullptr)
+      return 0;
+    int l = dfs(node->left);
+    int r = dfs(node->right);
+    if (l == -1 || r == -1 || abs(l - r) > 1)
+      return -1;
+    return max(l, r) + 1;
+  }
+};
+```
+
+## 剑指 Offer 68 - II. 二叉树的最近公共祖先
+
+带状态的后序遍历。为什么要使用后序遍历呢？因为只有知道了子树的状态，才能确定根节点的状态。因此当字数等于目标时，返回 1，否则返回 0。当前节点返回的值时子树的和，如果当前节点子树的和为 2，那么就说明当前节点是最近的公共节点。
+
+```cpp
+class Solution {
+public:
+  TreeNode* res = nullptr;
+  TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    int a = dfs(root, p, q);
+    return res;
+  }
+  int dfs(TreeNode* root, TreeNode* p, TreeNode* q) {
+    if (root == nullptr) {
+      return 0;
+    }
+    int l = dfs(root->left, p, q);
+    int r = dfs(root->right, p, q);
+    int a = 0;
+    if (root == p || root == q)
+      a = 1;
+    a += l + r;
+    if (a == 2 && res == nullptr)
+      res = root;
+    return a;
   }
 };
 ```

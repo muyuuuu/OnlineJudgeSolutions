@@ -7,6 +7,7 @@
   - [剑指 Offer 57. 和为s的两个数字](#剑指-offer-57-和为s的两个数字)
   - [剑指 Offer 56 - II. 数组中数字出现的次数 II](#剑指-offer-56---ii-数组中数字出现的次数-ii)
   - [剑指 Offer 58 - I. 翻转单词顺序](#剑指-offer-58---i-翻转单词顺序)
+  - [剑指 Offer 64. 求1+2+…+n](#剑指-offer-64-求12n)
 
 # 送分题
 
@@ -165,6 +166,19 @@ public:
       }
     }
     return a;
+  }
+};
+```
+
+## 剑指 Offer 64. 求1+2+…+n
+
+等差序列求和。
+
+```cpp
+class Solution {
+public:
+  int sumNums(int n) {
+    return (1 + n) * n / 2;
   }
 };
 ```
