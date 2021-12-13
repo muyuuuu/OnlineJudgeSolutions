@@ -8,6 +8,7 @@
   - [剑指 Offer 54. 二叉搜索树的第k大节点](#剑指-offer-54-二叉搜索树的第k大节点)
   - [剑指 Offer 55 - II. 平衡二叉树](#剑指-offer-55---ii-平衡二叉树)
   - [剑指 Offer 68 - II. 二叉树的最近公共祖先](#剑指-offer-68---ii-二叉树的最近公共祖先)
+  - [剑指 Offer 68 - I. 二叉搜索树的最近公共祖先](#剑指-offer-68---i-二叉搜索树的最近公共祖先)
 
 # 树
 
@@ -314,6 +315,64 @@ public:
     if (a == 2 && res == nullptr)
       res = root;
     return a;
+  }
+};
+```
+
+## 剑指 Offer 68 - I. 二叉搜索树的最近公共祖先
+
+和上一道题不同的是，这个题目是二叉搜索树，因此我们可以借助二叉搜索树的特性进行求解。还是先上带状态的后序遍历求解方法：
+
+```cpp
+class Solution {
+public:
+  TreeNode* res = nullptr;
+  int a{-1}, b{-1};
+  TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    dfs(root, p, q);
+    return res;
+  }
+  int dfs(TreeNode* root, TreeNode* p, TreeNode* q) {
+    if (root == nullptr)
+      return 0;
+    int l = dfs(root->left, p, q);
+    int r = dfs(root->right, p, q);
+    int a = 0;
+    if (root == p || root == q) {
+      a = 1;
+    }
+    a += (l + r);
+    if (a == 2 && res == nullptr)
+      res = root;
+    return a;
+  }
+};
+```
+
+从根节点开始遍历：
+
+- 如果节点大于 p 和 q，说明 p q 在当前节点的左子树
+- 如果节点小于 p 和 q，说明 p q 在当前节点的右子树
+- 否则，当前节点就是分叉点，返回分叉点即可
+
+```cpp
+class Solution {
+public:
+  TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    TreeNode* res = root;
+    while (1) {
+      if (root->val > p->val && root->val > q->val) {
+        root = root->left;
+      }
+      else if (root->val < p->val && root->val < q->val) {
+        root = root->right;
+      }
+      else {
+        res = root;
+        break;
+      }
+    }
+    return res;
   }
 };
 ```
