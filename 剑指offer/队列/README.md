@@ -1,5 +1,6 @@
 - [队列](#队列)
   - [剑指 Offer 59 - II. 队列的最大值](#剑指-offer-59---ii-队列的最大值)
+  - [剑指 Offer 62. 圆圈中最后剩下的数字](#剑指-offer-62-圆圈中最后剩下的数字)
 
 # 队列
 
@@ -40,6 +41,23 @@ public:
     q.pop_front();
     m[a]--;
     return a;
+  }
+};
+```
+
+## 剑指 Offer 62. 圆圈中最后剩下的数字
+
+传说中的约瑟夫环问题，当时还想着模拟，结果发现超时了。后来看答案，这种找规律题没啥意思...
+
+```cpp
+class Solution {
+public:
+  int lastRemaining(int n, int m) {
+    int x = 0;
+    for (int i = 2; i <= n; i++) {
+      x = (x + m) % i;
+    }
+    return x;
   }
 };
 ```

@@ -8,6 +8,7 @@
   - [剑指 Offer 56 - II. 数组中数字出现的次数 II](#剑指-offer-56---ii-数组中数字出现的次数-ii)
   - [剑指 Offer 58 - I. 翻转单词顺序](#剑指-offer-58---i-翻转单词顺序)
   - [剑指 Offer 64. 求1+2+…+n](#剑指-offer-64-求12n)
+  - [剑指 Offer 63. 股票的最大利润](#剑指-offer-63-股票的最大利润)
 
 # 送分题
 
@@ -179,6 +180,30 @@ class Solution {
 public:
   int sumNums(int n) {
     return (1 + n) * n / 2;
+  }
+};
+```
+
+## 剑指 Offer 63. 股票的最大利润
+
+刚开始想的是用 dp，后发发现模拟一下，记录历史最小值，如果值大于最小值，减去最小值即可。
+
+```cpp
+class Solution {
+public:
+  int maxProfit(vector<int>& prices) {
+    int res{0};
+    int n = prices.size();
+    if (n <= 1)
+      return 0;
+    int minn{prices[0]};
+    for (int i = 1; i < n; i++) {
+      if (prices[i] < minn)
+        minn = prices[i];
+      else
+        res = max(res, prices[i]-minn);
+    }
+    return res;
   }
 };
 ```
