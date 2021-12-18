@@ -9,6 +9,7 @@
   - [剑指 Offer 55 - II. 平衡二叉树](#剑指-offer-55---ii-平衡二叉树)
   - [剑指 Offer 68 - II. 二叉树的最近公共祖先](#剑指-offer-68---ii-二叉树的最近公共祖先)
   - [剑指 Offer 68 - I. 二叉搜索树的最近公共祖先](#剑指-offer-68---i-二叉搜索树的最近公共祖先)
+  - [剑指 Offer 33. 二叉搜索树的后序遍历序列](#剑指-offer-33-二叉搜索树的后序遍历序列)
 
 # 树
 
@@ -373,6 +374,35 @@ public:
       }
     }
     return res;
+  }
+};
+```
+
+## 剑指 Offer 33. 二叉搜索树的后序遍历序列
+
+输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。如果是则返回 true，否则返回 false。假设输入的数组的任意两个数字都互不相同。
+
+刚开始看到这个题目的时候有点晕，无从下手的感觉，看了题解后好一些了。从先从序列的开始到结尾分治处理，因为末尾节点一定是根节点，因此我们找到第一个大于根节点的节点，那么他一定是右子树。此时进行判断，右子树到根节点的位置中，所有节点一定大于根节点。然后分治处理左子树和右子树即可。
+
+```cpp
+class Solution {
+public:
+  bool verifyPostorder(vector<int>& postorder) {
+    return check(0, postorder.size() - 1, postorder);
+  }
+
+  bool check(int i, int j, vector<int>& postorder) {
+    if (i >= j)
+      return true;
+    int p = i;
+    while (postorder[p] < postorder[j]) {
+      p++;
+    }
+    int m = p;
+    while (postorder[p] > postorder[j]) {
+      p++;
+    }
+    return (p == j) && check(i, m - 1, postorder) && check(m, j - 1, postorder);
   }
 };
 ```
