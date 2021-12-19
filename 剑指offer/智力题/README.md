@@ -1,6 +1,8 @@
 - [智力题](#智力题)
   - [剑指 Offer 45. 把数组排成最小的数](#剑指-offer-45-把数组排成最小的数)
   - [剑指 Offer 66. 构建乘积数组](#剑指-offer-66-构建乘积数组)
+  - [剑指 Offer 14- I. 剪绳子](#剑指-offer-14--i-剪绳子)
+  - [剑指 Offer 14- II. 剪绳子 II](#剑指-offer-14--ii-剪绳子-ii)
 
 # 智力题
 
@@ -56,6 +58,70 @@ public:
       res[i] *= tmp;
     }
     return res;
+  }
+};
+```
+
+## 剑指 Offer 14- I. 剪绳子
+
+我当时以为是复杂的动态规划，后来发现题解中进行了数学推导，划分为 3 段时解最大，因此......直接背答案吧。
+
+```cpp
+class Solution {
+public:
+  int cuttingRope(int n) {
+    if (n <= 3)
+      return n - 1;
+    int x, y;
+    x = n / 3;
+    y = n % 3;
+    if (y == 0)
+      return int(pow(3, x));
+    else if (y == 1)
+      return int(pow(3, x - 1) * 4);
+    return int(pow(3, x) * 2);
+  }
+};
+```
+
+## 剑指 Offer 14- II. 剪绳子 II
+
+需要增加越界处理，如 `pow(3, 40)` 会溢出，所以在乘法期间进行模运算即可。
+
+```cpp
+class Solution {
+public:
+
+  const int mod = 1000000007;
+  int calc(int x) {
+    long long int tmp = 1;
+    for (int i = 0; i < x; i ++) {
+      tmp *= 3;
+      if (tmp > mod)
+        tmp %= mod;
+    }
+    return tmp;
+  }
+
+  int cuttingRope(int n) {
+    if (n <= 3)
+      return n - 1;
+    int x = n / 3, y = n % 3;
+    int a;
+    long long int res;
+    if (y == 0) {
+      res = calc(x);
+      a = 1;
+    }
+    else if (y == 1) {
+      a = 4;
+      res = calc(x - 1);
+    }
+    else {
+      a = 2;
+      res = calc(x);
+    }
+    return res * a % mod;
   }
 };
 ```
