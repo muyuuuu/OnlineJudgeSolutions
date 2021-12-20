@@ -10,6 +10,7 @@
   - [剑指 Offer 68 - II. 二叉树的最近公共祖先](#剑指-offer-68---ii-二叉树的最近公共祖先)
   - [剑指 Offer 68 - I. 二叉搜索树的最近公共祖先](#剑指-offer-68---i-二叉搜索树的最近公共祖先)
   - [剑指 Offer 33. 二叉搜索树的后序遍历序列](#剑指-offer-33-二叉搜索树的后序遍历序列)
+  - [剑指 Offer 07. 重建二叉树](#剑指-offer-07-重建二叉树)
 
 # 树
 
@@ -403,6 +404,38 @@ public:
       p++;
     }
     return (p == j) && check(i, m - 1, postorder) && check(m, j - 1, postorder);
+  }
+};
+```
+
+## 剑指 Offer 07. 重建二叉树
+
+输入某二叉树的前序遍历和中序遍历的结果，请构建该二叉树并返回其根节点。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。典中典的问题，根据先序提供的根节点，在中序中确定左右子树，递归解决问题。
+
+```cpp
+class Solution {
+public:
+  unordered_map<int, int> m1;
+  vector<int> preorder;
+  TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+    int n = preorder.size();
+    this->preorder = preorder;
+    for (int i = 0; i < preorder.size(); i++)
+      m1[inorder[i]] = i;
+    return func(0, 0, n - 1);
+  }
+
+  TreeNode* func(int root, int l, int r) {
+    if (l > r)
+      return nullptr;
+    TreeNode* node = new TreeNode(preorder[root]);
+    // 第一个节点一定是根节点
+    int idx = m1[preorder[root]];
+    // 根节点左侧是左子树的根节点，所以 root + 1
+    node->left = func(root + 1, l, idx - 1);
+    // idx - l 是根节点相对左侧的偏移，跳过这一部分
+    node->right = func(root + idx - l + 1, idx + 1, r);
+    return node;
   }
 };
 ```
