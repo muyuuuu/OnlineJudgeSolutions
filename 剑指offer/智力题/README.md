@@ -125,3 +125,50 @@ public:
   }
 };
 ```
+
+## 剑指 Offer 51. 数组中的逆序对
+
+ 重新学习了一下归并排序，思路挺不错。在归并的时候，统计逆序数的数量。此外注意下标，均要能取到后一位。
+
+```cpp
+class Solution {
+public:
+  vector<int> v;
+  vector<int> tmp;
+  int reversePairs(vector<int>& nums) {
+    int n = nums.size();
+    this->v = nums;
+    tmp.resize(n);
+    int res = merge(0, n - 1);
+    return res;
+  }
+
+  int merge(int l, int r) {
+    if (l >= r)
+      return 0;
+    int m = l + (r - l) / 2;
+    int res = merge(l, m) + merge(m + 1, r);
+
+    int a = l, b = m + 1;
+
+    for (int i = l; i <= r; i++)
+      tmp[i] = v[i];
+
+    for (int i = l; i <= r; i++) {
+      // 左侧走到头，一定来自右侧
+      if (a == m + 1)
+        v[i] = tmp[b++];
+      // 右侧走到头或者左侧小，一定来自左侧
+      else if (b == r + 1 || tmp[a] <= tmp[b])
+        v[i] = tmp[a++];
+      // 右侧比左侧小，统计逆序数，各个子数组已经排序好
+      else {
+        v[i] = tmp[b++];
+        res += m - a + 1;
+      }
+    }
+
+    return res;
+  }
+};
+```
